@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -53,6 +54,12 @@ public class User implements UserDetails {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
     private VerifyEmail verifyEmail;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Habit> habits;
+
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
+    private List<Event> events;
 
     @Column(nullable = false)
     private LocalDateTime dateOfRegistration;

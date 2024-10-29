@@ -1,22 +1,23 @@
 package com.ecowaste.recycling.config;
 
-import com.ecowaste.recycling.service.CustomOAuth2UserService;
-import com.ecowaste.recycling.service.JwtService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import java.util.Arrays;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@Slf4j
 public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthFilter;
 
@@ -28,7 +29,8 @@ public class SecurityConfig {
             "/webjars/**",
             "/swagger-ui.html",
             "/userRegistration/signUp",
-            "/userRegistration/signIn"
+            "/userRegistration/signIn",
+            "/favicon.ico"
     };
 
     @Bean
@@ -39,8 +41,8 @@ public class SecurityConfig {
                         .requestMatchers(WHITELIST).permitAll()
                         .anyRequest().authenticated()
                 )
-               .httpBasic(withDefaults());
-
+                .httpBasic(withDefaults());
+        log.debug("Security configuration initialized. Whitelisted paths: {}", Arrays.toString(WHITELIST));
 
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 

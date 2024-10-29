@@ -13,6 +13,4 @@ public class OAuth2RedirectController {
     public RedirectView loginSuccessGoogle() {
         return new RedirectView("https://www.linkedin.com/in/nazar-vavrushchak-8135b1302/");//in url should be link to frontend part
     }
-
-    //can add facebook or git-hub
 }
