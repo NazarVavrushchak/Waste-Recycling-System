@@ -100,10 +100,18 @@ public class EventServiceImpl implements EventService {
         Event event = eventRepo.findById(eventId)
                 .orElseThrow(() -> new IllegalArgumentException("Event not found with ID: " + eventId));
 
-        event.setCompleted(true); // Mark as completed
+        event.setCompleted(true);
         event = eventRepo.save(event);
 
         return mapToDto(event);
+    }
+
+    @Override
+    public void deleteEvent(Long eventId) {
+        Event event = eventRepo.findById(eventId)
+                .orElseThrow(() -> new IllegalArgumentException("Event not found with ID :" + eventId));
+
+        eventRepo.delete(event);
     }
 
     private EventResponseDto mapToDto(Event event) {

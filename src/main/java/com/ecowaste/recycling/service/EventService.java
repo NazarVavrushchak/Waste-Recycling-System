@@ -10,4 +10,5 @@ public interface EventService {
     EventResponseDto updateEvent(EventRequestDto requestDto, Long id);
     List<EventResponseDto> getAllEvents(Long userId);
     EventResponseDto markEventAsCompleted(Long eventId);
+    void deleteEvent(Long eventId);
 }

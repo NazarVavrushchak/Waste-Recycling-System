@@ -7,8 +7,14 @@ import java.util.List;
 
 public interface HabitService {
     HabitDtoResponse createHabit(HabitDtoRequest habitDtoRequest, Long userId);
+
     List<HabitDtoResponse> getHabitsByUserId(Long userId);
-    HabitDtoResponse updateHabit(Long id , HabitDtoRequest request);
+
+    HabitDtoResponse updateHabit(Long id, HabitDtoRequest request);
+
     HabitDtoResponse markHabitAsCompleted(Long habitId);
+
     long countCompletedHabitsByUser(Long userId);
+
+    void deleteHabit(Long habitId);
 }

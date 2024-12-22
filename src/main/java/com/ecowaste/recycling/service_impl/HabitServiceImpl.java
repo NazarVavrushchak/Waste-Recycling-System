@@ -107,6 +107,14 @@ public class HabitServiceImpl implements HabitService {
         return habitRepo.countCompletedHabitsByUserId(userId);
     }
 
+    @Override
+    public void deleteHabit(Long habitId) {
+        Habit habit = habitRepo.findById(habitId)
+                .orElseThrow(() -> new IllegalArgumentException("Habit not found with ID" + habitId));
+
+        habitRepo.delete(habit);
+    }
+
     private HabitDtoResponse mapToDto(Habit habit) {
         return HabitDtoResponse.builder()
                 .id(habit.getId())

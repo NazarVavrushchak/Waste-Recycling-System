@@ -61,6 +61,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
     private List<Event> events;
 
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
+    private List<Goal> goals;
+
     @Column(nullable = false)
     private LocalDateTime dateOfRegistration;
 

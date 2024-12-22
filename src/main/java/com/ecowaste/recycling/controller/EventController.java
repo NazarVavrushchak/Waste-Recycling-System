@@ -39,4 +39,10 @@ public class EventController {
         EventResponseDto completedEvent = eventService.markEventAsCompleted(id);
         return ResponseEntity.ok(completedEvent);
     }
+
+    @DeleteMapping("/delete/{eventId}")
+    public ResponseEntity<String> deleteEvent(@PathVariable Long eventId){
+        eventService.deleteEvent(eventId);
+        return ResponseEntity.ok("Event deleted successfully");
+    }
 }

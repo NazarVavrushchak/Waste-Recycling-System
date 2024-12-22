@@ -41,4 +41,10 @@ public class HabitController {
         HabitDtoResponse completedEvent = habitService.markHabitAsCompleted(id);
         return ResponseEntity.ok(completedEvent);
     }
+
+    @DeleteMapping("/delete/{habitId}")
+    public ResponseEntity<String> deleteHabit(@PathVariable Long habitId){
+        habitService.deleteHabit(habitId);
+        return ResponseEntity.ok("Habit deleted successfully");
+    }
 }

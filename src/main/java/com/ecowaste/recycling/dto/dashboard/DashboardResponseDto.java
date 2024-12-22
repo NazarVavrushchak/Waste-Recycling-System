@@ -10,4 +10,6 @@ public class DashboardResponseDto {
     private long completedHabits;
     private long eventsParticipated;
     private String currentGoal;
+    private long daysActiveLastMonth;
+    private String lastActivityDate;
 }
