@@ -1,6 +1,5 @@
 package com.ecowaste.recycling.repository;
 
-import com.ecowaste.recycling.dto.habit.HabitDtoResponse;
 import com.ecowaste.recycling.entity.Habit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

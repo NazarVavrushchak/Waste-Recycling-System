@@ -7,7 +7,6 @@ import com.ecowaste.recycling.repository.UserRepo;
 import com.ecowaste.recycling.service.CustomOAuth2UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -79,7 +78,7 @@ public class CustomOAuth2UserServiceImpl extends OidcUserService implements Cust
                 .role(Role.USER)//than I want add ability to change the role
                 .password("default_password")
                 .build();
-       return  userRepo.save(user);
+        return userRepo.save(user);
     }
 
     private String generateDefaultRefreshTokenKey() {
