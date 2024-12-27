@@ -40,6 +40,15 @@ public class Habit {
     @Column(updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Column(nullable = false)
+    private LocalDateTime startDate;
+
+    @Column(nullable = false)
+    private LocalDateTime endDate;
+
+    @Column(nullable = false)
+    private int durationInDays;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

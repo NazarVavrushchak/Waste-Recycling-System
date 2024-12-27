@@ -30,12 +30,21 @@ public class HabitServiceImpl implements HabitService {
         User user = userRepo.findById(Math.toIntExact(userId))
                 .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userId));
 
+        if (request.getEndDate().isBefore(request.getStartDate())) {
+            throw new IllegalArgumentException("End date cannot be before start date");
+        }
+
+        int durationInDays = (int) java.time.Duration.between(request.getStartDate(), request.getEndDate()).toDays();
+
         Habit habit = Habit.builder()
                 .title(request.getTitle())
                 .description(request.getDescription())
                 .tags(new HashSet<>(request.getTags()))
                 .difficulty(request.getDifficulty())
                 .user(user)
+                .startDate(request.getStartDate())
+                .endDate(request.getEndDate())
+                .durationInDays(durationInDays)
                 .createdAt(LocalDateTime.now())
                 .completed(false)
                 .build();
@@ -49,6 +58,7 @@ public class HabitServiceImpl implements HabitService {
 
         return mapToDto(habit);
     }
+
 
     @Override
     public List<HabitDtoResponse> getHabitsByUserId(Long userId) {
@@ -76,12 +86,18 @@ public class HabitServiceImpl implements HabitService {
         if (request.getTags() != null && !request.getTags().isEmpty()) {
             habit.setTags(new HashSet<>(request.getTags()));
         }
-
+        if (request.getStartDate() != null && request.getEndDate() != null) {
+            if (request.getEndDate().isBefore(request.getStartDate())) {
+                throw new IllegalArgumentException("End date cannot be before start date");
+            }
+            habit.setStartDate(request.getStartDate());
+            habit.setEndDate(request.getEndDate());
+            habit.setDurationInDays((int) java.time.Duration.between(request.getStartDate(), request.getEndDate()).toDays());
+        }
         if (request.getImage() != null && !request.getImage().isEmpty()) {
             String imageUrl = FileUploadUtil.saveFile(request.getImage());
             habit.setImageUrl(imageUrl);
         }
-
         if (request.isCompleted() != habit.isCompleted()) {
             habit.setCompleted(request.isCompleted());
         }
@@ -90,6 +106,7 @@ public class HabitServiceImpl implements HabitService {
 
         return mapToDto(habit);
     }
+
 
     @Override
     public HabitDtoResponse markHabitAsCompleted(Long habitId) {
@@ -125,6 +142,9 @@ public class HabitServiceImpl implements HabitService {
                 .imageUrl(habit.getImageUrl())
                 .createdAt(habit.getCreatedAt())
                 .completed(habit.isCompleted())
+                .startDate(habit.getStartDate())
+                .endDate(habit.getEndDate())
+                .durationInDays(habit.getDurationInDays())
                 .build();
     }
 }

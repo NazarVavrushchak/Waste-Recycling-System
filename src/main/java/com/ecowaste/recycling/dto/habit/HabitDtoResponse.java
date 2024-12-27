@@ -20,4 +20,7 @@ public class HabitDtoResponse {
     private String imageUrl;
     private LocalDateTime createdAt;
     private boolean completed;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    private int durationInDays;
 }

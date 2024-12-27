@@ -1,0 +1,121 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0fff4; /* Салатовий фон */
+}
+
+header {
+    background-color: #32CD32; /* Насичений салатовий */
+    color: white;
+    padding: 1rem 2rem;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+}
+
+header nav ul li {
+    display: inline;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav ul li a.active {
+    text-decoration: underline;
+}
+
+main {
+    padding: 2rem;
+}
+
+/* Form Styles */
+.habit-form-container {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid #32CD32; /* Салатова рамка */
+}
+
+.habit-form-container h1 {
+    text-align: center;
+    color: #32CD32; /* Салатовий заголовок */
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #006400; /* Темно-зелений */
+}
+
+input, textarea, button {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f8fff0; /* Легкий салатовий */
+}
+
+textarea {
+    resize: vertical;
+}
+
+.difficulty-rating span {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ddd;
+}
+
+.difficulty-rating span.active {
+    color: #32CD32; /* Салатовий */
+}
+
+.tags-container {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.tags-container .tag {
+    background-color: #32CD32;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.duration-display {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #006400; /* Темно-зелений */
+}
+
+button.cancel {
+    background-color: #f44336;
+    color: white;
+}
+
+button.submit {
+    background-color: #32CD32; /* Салатовий */
+    color: white;
+    font-weight: bold;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/css/user_space.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="#habits" class="active">Habits</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="top-container">
+        <section id="photo-and-achievements">
+            <h2>Upload Photo</h2>
+            <form id="photo-upload-form" enctype="multipart/form-data">
+                <label for="photo">Choose a photo:</label>
+                <input type="file" id="photo" name="photo" accept="image/*">
+                <button type="submit">Upload</button>
+            </form>
+            <div id="achievements">
+                <h2>Achievements</h2>
+                <ul>
+                    <li>Completed 30-day habit streak</li>
+                    <li>Recycled 50kg of waste</li>
+                    <li>Participated in 10 community events</li>
+                </ul>
+            </div>
+        </section>
+        <section id="calendar-and-functionality">
+            <div id="calendar-container">
+                <h3>December 2024</h3>
+                <div id="calendar"></div>
+            </div>
+            <div id="functionality">
+                <h3>Upcoming Event</h3>
+                <p>Join the Community Cleanup on December 10th!</p>
+            </div>
+        </section>
+        <section id="facts-container">
+            <div class="fact">
+                <strong>Fact of the Day:</strong>
+                <p>6 to 8 million people die annually from water-borne diseases and disasters.</p>
+            </div>
+            <div class="fact">
+                <strong>Fact of the Day:</strong>
+                <p>Throwing plastic bags in the ocean kills as many as 1 million sea creatures annually.</p>
+            </div>
+            <div class="fact">
+                <strong>Fact of the Day:</strong>
+                <p>Recycling one ton of paper saves 17 trees, conserves 26,000 liters of water, and saves 2.5 cubic meters of landfill space.</p>
+            </div>
+            <div class="fact">
+                <strong>Fact of the Day:</strong>
+                <p>Glass can be recycled infinitely without losing quality.</p>
+            </div>
+        </section>
+    </div>
+</main>
+<footer>
+    <p>© 2024 Waste Recycling</p>
+    <div class="social-icons">
+        <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+<script src="/static/js/user_space.js"></script>
+</body>
+</html>

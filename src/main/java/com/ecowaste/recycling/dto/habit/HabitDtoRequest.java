@@ -2,10 +2,12 @@ package com.ecowaste.recycling.dto.habit;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -50,4 +52,10 @@ public class HabitDtoRequest {
     private MultipartFile image;
     private Long userId;
     private boolean completed;
+
+    @NotNull(message = "Start date is required")
+    private LocalDateTime startDate;
+
+    @NotNull(message = "End date is required")
+    private LocalDateTime endDate;
 }
