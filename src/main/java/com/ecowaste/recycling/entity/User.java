@@ -64,6 +64,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
     private List<Goal> goals;
 
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
+    private List<RecyclingPoint> points;
+
     @Column(nullable = false)
     private LocalDateTime dateOfRegistration;
 

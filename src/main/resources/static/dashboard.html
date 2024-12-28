@@ -1,0 +1,174 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Dashboard</title>-->
+<!--    <link rel="stylesheet" href="/css/dashboard.css">-->
+<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">-->
+<!--    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">-->
+<!--</head>-->
+<!--<body>-->
+<!--<header>-->
+<!--    <nav>-->
+<!--        <ul>-->
+<!--            <li><a href="main.html">Home</a></li>-->
+<!--            <li><a href="habit.html">Habits</a></li>-->
+<!--            <li><a href="event.html">Events</a></li>-->
+<!--            <li><a href="dashboard.html" class="active">Dashboard</a></li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--</header>-->
+<!--<div class="main-container">-->
+<!--    <div class="dashboard-container">-->
+<!--        <h1>Dashboard</h1>-->
+<!--        <div class="user-info">-->
+<!--            <h2 id="user-name">Welcome, User!</h2>-->
+<!--        </div>-->
+<!--        <div class="statistics">-->
+<!--            <div class="stat">-->
+<!--                <h3>Completed Habits</h3>-->
+<!--                <p id="completed-habits">0</p>-->
+<!--            </div>-->
+<!--            <div class="stat">-->
+<!--                <h3>Events Participated</h3>-->
+<!--                <p id="events-participated">0</p>-->
+<!--            </div>-->
+<!--            <div class="stat">-->
+<!--                <h3>Current Goal</h3>-->
+<!--                <p id="current-goal">No current goal</p>-->
+<!--            </div>-->
+<!--            <div class="stat">-->
+<!--                <h3>Days Active Last Month</h3>-->
+<!--                <p id="days-active-last-month">0</p>-->
+<!--            </div>-->
+<!--            <div class="stat">-->
+<!--                <h3>Last Activity Date</h3>-->
+<!--                <p id="last-activity-date">No activity recorded</p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="goals">-->
+<!--            <h2>Your Goals</h2>-->
+<!--            <ul id="goal-list">-->
+<!--                &lt;!&ndash; Goal list items will be dynamically inserted here &ndash;&gt;-->
+<!--            </ul>-->
+<!--            <button id="create-goal-btn">+ Add New Goal</button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div id="goal-form-container" class="goal-form-container">-->
+<!--        <form id="goal-form">-->
+<!--            <h3>Create New Goal</h3>-->
+<!--            <label for="goal-description">Goal Description:</label>-->
+<!--            <textarea id="goal-description" placeholder="Describe your goal..." required></textarea><br>-->
+
+<!--            <label for="goal-target-date">Target Date:</label>-->
+<!--            <input type="date" id="goal-target-date" required><br>-->
+
+<!--            <div class="form-actions">-->
+<!--                <button type="submit" class="save-btn">Save Goal</button>-->
+<!--                <button type="button" id="cancel-goal-btn" class="cancel-btn">Cancel</button>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<footer>-->
+<!--    <p>© 2024 Waste Recycling</p>-->
+<!--    <div class="social-icons">-->
+<!--        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>-->
+<!--        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>-->
+<!--        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>-->
+<!--        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>-->
+<!--    </div>-->
+<!--</footer>-->
+
+<!--<script src="/js/dashboard.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="main.html">Home</a></li>
+            <li><a href="habit.html">Habits</a></li>
+            <li><a href="event.html">Events</a></li>
+            <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="main-container">
+    <div class="dashboard-container">
+        <h1>Dashboard</h1>
+        <div class="user-info">
+            <h2 id="user-name">Welcome, User!</h2>
+        </div>
+        <div class="statistics">
+            <div class="stat">
+                <h3>Completed Habits</h3>
+                <p id="completed-habits">0</p>
+            </div>
+            <div class="stat">
+                <h3>Events Participated</h3>
+                <p id="events-participated">0</p>
+            </div>
+            <div class="stat">
+                <h3>Current Goal</h3>
+                <p id="current-goal">No current goal</p>
+            </div>
+            <div class="stat">
+                <h3>Days Active Last Month</h3>
+                <p id="days-active-last-month">0</p>
+            </div>
+            <div class="stat">
+                <h3>Last Activity Date</h3>
+                <p id="last-activity-date">No activity recorded</p>
+            </div>
+        </div>
+        <div class="goals">
+            <h2>Your Goals</h2>
+            <ul id="goal-list">
+                <!-- Goal list items will be dynamically inserted here -->
+            </ul>
+            <button id="create-goal-btn">+ Add New Goal</button>
+        </div>
+    </div>
+    <div id="goal-form-container" class="goal-form-container">
+        <form id="goal-form">
+            <h3>Create New Goal</h3>
+            <label for="goal-description">Goal Description:</label>
+            <textarea id="goal-description" placeholder="Describe your goal..." required></textarea><br>
+
+            <label for="goal-target-date">Target Date:</label>
+            <input type="date" id="goal-target-date" required><br>
+
+            <div class="form-actions">
+                <button type="submit" class="save-btn">Save Goal</button>
+                <button type="button" id="cancel-goal-btn" class="cancel-btn">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p>© 2024 Waste Recycling</p>
+    <div class="social-icons">
+        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+    </div>
+</footer>
+
+<script src="/js/dashboard.js"></script>
+</body>
+</html>

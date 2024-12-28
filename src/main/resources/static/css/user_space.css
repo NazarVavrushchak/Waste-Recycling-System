@@ -1,4 +1,3 @@
-/* Загальні стилі */
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -7,7 +6,7 @@ body {
     color: #333;
 }
 
-/* Хедер */
+/* Header */
 header nav {
     background-color: #A4D07C;
     padding: 20px;
@@ -40,7 +39,7 @@ header nav ul li a.active {
     text-decoration: none;
 }
 
-/* Топ секція */
+/* Top section */
 .top-container {
     display: flex;
     justify-content: space-between;
@@ -57,7 +56,7 @@ header nav ul li a.active {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Фото + Досягнення */
+/* Photo + Achievements */
 #photo-and-achievements {
     flex: 0 0 20%;
     text-align: center;
@@ -95,7 +94,13 @@ header nav ul li a.active {
     background-color: #45a049;
 }
 
-/* Досягнення */
+#photo-and-achievements img {
+    margin-top: 15px;
+    max-width: 100%; /* Ensure the image fits within its container */
+    border-radius: 5px;
+}
+
+/* Achievements */
 #achievements ul {
     list-style-type: none;
     padding: 0;
@@ -115,7 +120,7 @@ header nav ul li a.active {
     background-color: #d0f2d2;
 }
 
-/* Календар */
+/* Calendar */
 #calendar-and-functionality {
     flex: 0 0 45%;
 }
@@ -137,7 +142,7 @@ header nav ul li a.active {
     margin-bottom: 15px;
 }
 
-/* Функціональність */
+/* Functionality */
 #functionality {
     background: #e7f6e7;
     border-radius: 15px;
@@ -151,7 +156,7 @@ header nav ul li a.active {
     color: #333;
 }
 
-/* Факти */
+/* Facts */
 #facts-container {
     flex: 1;
     display: flex;
@@ -172,7 +177,7 @@ header nav ul li a.active {
     transform: scale(1.05);
 }
 
-/* Футер */
+/* Footer */
 footer {
     text-align: center;
     padding: 20px;

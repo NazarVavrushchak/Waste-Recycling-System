@@ -3,6 +3,7 @@ package com.ecowaste.recycling.dto.habit;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -17,7 +18,7 @@ public class HabitDtoResponse {
     private String description;
     private Integer difficulty;
     private Set<String> tags;
-    private String imageUrl;
+    private List<String> images;
     private LocalDateTime createdAt;
     private boolean completed;
     private LocalDateTime startDate;

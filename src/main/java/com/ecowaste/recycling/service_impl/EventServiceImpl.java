@@ -3,16 +3,19 @@ package com.ecowaste.recycling.service_impl;
 import com.ecowaste.recycling.dto.event.EventRequestDto;
 import com.ecowaste.recycling.dto.event.EventResponseDto;
 import com.ecowaste.recycling.entity.Event;
+import com.ecowaste.recycling.entity.Image;
 import com.ecowaste.recycling.entity.User;
 import com.ecowaste.recycling.repository.EventRepo;
 import com.ecowaste.recycling.repository.UserRepo;
 import com.ecowaste.recycling.service.EventService;
+import com.ecowaste.recycling.service.ImageService;
 import com.ecowaste.recycling.util.FileUploadUtil;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,10 +24,11 @@ import java.util.List;
 public class EventServiceImpl implements EventService {
     private final EventRepo eventRepo;
     private final UserRepo userRepo;
+    private final ImageService imageService;
 
     @Override
     @SneakyThrows
-    public EventResponseDto createEvent(EventRequestDto requestDto , Long userid) {
+    public EventResponseDto createEvent(EventRequestDto requestDto, Long userid) {
         User user = userRepo.findById(Math.toIntExact(userid))
                 .orElseThrow(() -> new RuntimeException("User not found with ID: " + requestDto.getUserId()));
 
@@ -39,12 +43,13 @@ public class EventServiceImpl implements EventService {
                 .completed(requestDto.getCompleted() != null ? requestDto.getCompleted() : false)
                 .build();
 
-        if (requestDto.getImage() != null && !requestDto.getImage().isEmpty()) {
-            String imageUrl = FileUploadUtil.saveFile(requestDto.getImage());
-            event.setImageUrl(imageUrl);
-        }
-
         event = eventRepo.save(event);
+
+        if (requestDto.getImage() != null && !requestDto.getImage().isEmpty()) {
+            Image image = imageService.saveImage(requestDto.getImage(), event);
+            event.addImage(image);
+            eventRepo.save(event);
+        }
 
         return mapToDto(event);
     }
@@ -115,6 +120,12 @@ public class EventServiceImpl implements EventService {
     }
 
     private EventResponseDto mapToDto(Event event) {
+        List<String> imageUrls = event.getImages() == null ?
+                new ArrayList<>() :
+                event.getImages().stream()
+                        .map(image -> "/images/" + image.getId())
+                        .toList();
+
         return EventResponseDto.builder()
                 .id(event.getId())
                 .title(event.getTitle())
@@ -123,7 +134,7 @@ public class EventServiceImpl implements EventService {
                 .startTime(event.getStartTime())
                 .description(event.getDescription())
                 .locationType(event.getLocationType())
-                .imageUrl(event.getImageUrl())
+                .images(imageUrls)
                 .userFullName(event.getUser().getUsername())
                 .completed(event.isCompleted())
                 .build();

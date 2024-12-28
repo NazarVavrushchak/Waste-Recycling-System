@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -19,6 +20,6 @@ public class EventResponseDto {
     private LocalDateTime startTime;
     private LocationType locationType;
     private String userFullName;
-    private String imageUrl;
+    private List<String> images;;
     private Boolean completed;
 }

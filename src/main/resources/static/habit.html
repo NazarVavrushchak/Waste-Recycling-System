@@ -3,75 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habit Tracker</title>
-    <link rel="stylesheet" href="/static/css/styless.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <title>Habits Tracker</title>
+    <link rel="stylesheet" href="/css/habit.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <header>
     <nav>
         <ul>
-            <li><a href="#" class="active">Create Habit</a></li>
-            <li><a href="#">My Habits</a></li>
-            <li><a href="#">Statistics</a></li>
+            <li><a href="main.html">Home</a></li>
+            <li><a href="habit.html" class="active">Habits</a></li>
+            <li><a href="event.html">Events</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
         </ul>
     </nav>
 </header>
 <main>
-    <section class="habit-form-container">
-        <h1>Create Habit</h1>
-        <form id="habit-form">
-            <!-- Title -->
-            <div class="form-group">
-                <label for="habit-title">Habit Title</label>
-                <input type="text" id="habit-title" name="title" maxlength="70" placeholder="Enter habit name" required>
-            </div>
-            <!-- Difficulty -->
-            <div class="form-group">
-                <label for="difficulty">Difficulty Level</label>
-                <div class="difficulty-rating" id="difficulty">
-                    <span data-value="1">&#9733;</span>
-                    <span data-value="2">&#9733;</span>
-                    <span data-value="3">&#9733;</span>
-                    <span data-value="4">&#9733;</span>
-                    <span data-value="5">&#9733;</span>
-                </div>
-            </div>
-            <!-- Tags -->
-            <div class="form-group">
-                <label for="tags">Tags</label>
-                <div id="tags-container" class="tags-container"></div>
-                <input type="text" id="new-tag" placeholder="Add a tag" maxlength="20">
-                <button type="button" id="add-tag-btn">Add Tag</button>
-            </div>
-            <!-- Dates -->
-            <div class="form-group">
-                <label for="start-date">Start Date</label>
-                <input type="text" id="start-date" name="startDate" class="date-picker" placeholder="Select start date" required>
-            </div>
-            <div class="form-group">
-                <label for="end-date">End Date</label>
-                <input type="text" id="end-date" name="endDate" class="date-picker" placeholder="Select end date" required>
-            </div>
-            <!-- Duration -->
-            <div class="form-group">
-                <label for="duration">Habit Duration</label>
-                <p id="duration" class="duration-display">Duration will be calculated...</p>
-            </div>
-            <!-- Description -->
-            <div class="form-group">
+    <div class="top-container">
+        <section id="habit-form-container" class="card">
+            <h2>Create or Update Habit</h2>
+            <form id="habit-form" enctype="multipart/form-data">
+                <input type="hidden" id="habit-id" name="id">
+                <label for="title">Habit Title</label>
+                <input type="text" id="title" name="title" placeholder="e.g., Morning Run" required>
+
                 <label for="description">Description</label>
-                <textarea id="description" name="description" rows="5" placeholder="Describe your habit" required></textarea>
+                <textarea id="description" name="description" rows="4" placeholder="Brief description of the habit"
+                          required></textarea>
+
+                <div class="form-group">
+                    <div>
+                        <label for="start-date">Start Date</label>
+                        <input type="date" id="start-date" name="start-date" required>
+                    </div>
+                    <div>
+                        <label for="end-date">End Date</label>
+                        <input type="date" id="end-date" name="end-date" required>
+                    </div>
+                </div>
+
+                <label for="tags">Tags (comma-separated)</label>
+                <input type="text" id="tags" name="tags" placeholder="e.g., fitness, health">
+
+                <label for="difficulty">Difficulty</label>
+                <select id="difficulty" name="difficulty" required>
+                    <option value="Easy">Easy</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="Hard">Hard</option>
+                </select>
+
+                <label for="image">Upload an Image</label>
+                <input type="file" id="image" name="image" accept="image/*">
+                <div id="image-preview" class="image-preview-container"></div>
+
+                <button type="submit" class="btn-primary">Save Habit</button>
+            </form>
+        </section>
+
+        <section id="habits-container" class="card">
+            <h2>Your Habits</h2>
+            <ul id="habits-list" class="habits-list"></ul>
+
+            <div class="progress-container">
+                <h3>Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress" id="progress-bar-fill"></div>
+                </div>
+                <p id="progress-text"></p>
             </div>
-            <!-- Submit -->
-            <div class="form-actions">
-                <button type="reset" class="cancel">Cancel</button>
-                <button type="submit" class="submit">Create Habit</button>
-            </div>
-        </form>
-    </section>
+        </section>
+    </div>
 </main>
-<script src="script.js"></script>
+
+<footer>
+    <p>© 2024 Waste Recycling</p>
+    <div class="social-icons">
+        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+    </div>
+</footer>
+
+<script src="/js/habit.js"></script>
 </body>
 </html>
