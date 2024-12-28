@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recycling Points</title>
+    <link rel="stylesheet" href="/css/recyclingPoint.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search for a place">
+        <input type="text" id="location-input" placeholder="Choose location">
+    </div>
+    <div class="filter-bar">
+        <button class="filter-btn" data-filter="shops">Shops</button>
+        <button class="filter-btn" data-filter="recycling">Recycling Points</button>
+        <button class="filter-btn" data-filter="events">Events</button>
+        <button class="filter-btn" data-filter="saved">Saved Places</button>
+        <a href="/addRecyclingPlace.html" id="add-place-btn" class="btn btn-primary">Add Place for Recycling</a>
+    </div>
+</header>
+<main>
+    <section class="popular-places">
+        <h2>Popular Eco Places</h2>
+        <ul id="places-list"></ul>
+    </section>
+    <section class="map-container">
+        <div id="map"></div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2024 Waste Recycling</p>
+    <div class="social-icons">
+        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="/js/recyclingPoint.js"></script>
+</body>
+</html>

@@ -2,19 +2,31 @@ package com.ecowaste.recycling.controller;
 
 import com.ecowaste.recycling.dto.habit.HabitDtoRequest;
 import com.ecowaste.recycling.dto.habit.HabitDtoResponse;
+import com.ecowaste.recycling.entity.Habit;
 import com.ecowaste.recycling.service.HabitService;
+import com.ecowaste.recycling.service_impl.HabitServiceImpl;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
 @RequestMapping("/habits")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class HabitController {
     private final HabitService habitService;
+    private final HabitServiceImpl habitServiceImpl;
 
     @PostMapping(value = "/create", consumes = {"multipart/form-data"})
     public ResponseEntity<String> createHabit(@Valid @ModelAttribute HabitDtoRequest request) {

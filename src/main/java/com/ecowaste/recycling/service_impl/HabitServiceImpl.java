@@ -3,19 +3,22 @@ package com.ecowaste.recycling.service_impl;
 import com.ecowaste.recycling.dto.habit.HabitDtoRequest;
 import com.ecowaste.recycling.dto.habit.HabitDtoResponse;
 import com.ecowaste.recycling.entity.Habit;
+import com.ecowaste.recycling.entity.Image;
 import com.ecowaste.recycling.entity.User;
 import com.ecowaste.recycling.repository.HabitRepo;
 import com.ecowaste.recycling.repository.UserRepo;
 import com.ecowaste.recycling.service.HabitService;
-import com.ecowaste.recycling.util.FileUploadUtil;
+import com.ecowaste.recycling.service.ImageService;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -23,12 +26,17 @@ import java.util.List;
 public class HabitServiceImpl implements HabitService {
     private final HabitRepo habitRepo;
     private final UserRepo userRepo;
+    private final ImageService imageService;
 
     @Override
     @SneakyThrows
     public HabitDtoResponse createHabit(HabitDtoRequest request, Long userId) {
         User user = userRepo.findById(Math.toIntExact(userId))
                 .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userId));
+
+        if (request.getStartDate() == null || request.getEndDate() == null) {
+            throw new IllegalArgumentException("Start date and end date cannot be null");
+        }
 
         if (request.getEndDate().isBefore(request.getStartDate())) {
             throw new IllegalArgumentException("End date cannot be before start date");
@@ -49,16 +57,16 @@ public class HabitServiceImpl implements HabitService {
                 .completed(false)
                 .build();
 
-        if (request.getImage() != null && !request.getImage().isEmpty()) {
-            String imageUrl = FileUploadUtil.saveFile(request.getImage());
-            habit.setImageUrl(imageUrl);
-        }
+        habit = habitRepo.save(habit);
 
-        habitRepo.save(habit);
+        if (request.getImage() != null && !request.getImage().isEmpty()) {
+            Image image = imageService.saveImage(request.getImage(), habit);
+            habit.addImage(image);
+            habitRepo.save(habit);
+        }
 
         return mapToDto(habit);
     }
-
 
     @Override
     public List<HabitDtoResponse> getHabitsByUserId(Long userId) {
@@ -95,8 +103,8 @@ public class HabitServiceImpl implements HabitService {
             habit.setDurationInDays((int) java.time.Duration.between(request.getStartDate(), request.getEndDate()).toDays());
         }
         if (request.getImage() != null && !request.getImage().isEmpty()) {
-            String imageUrl = FileUploadUtil.saveFile(request.getImage());
-            habit.setImageUrl(imageUrl);
+            Image image = imageService.saveImage(request.getImage(), habit);
+            habit.addImage(image);
         }
         if (request.isCompleted() != habit.isCompleted()) {
             habit.setCompleted(request.isCompleted());
@@ -133,13 +141,19 @@ public class HabitServiceImpl implements HabitService {
     }
 
     private HabitDtoResponse mapToDto(Habit habit) {
+        List<String> imageUrls = habit.getImages() == null ?
+                new ArrayList<>() :
+                habit.getImages().stream()
+                        .map(image -> "/images/" + image.getId())
+                        .collect(Collectors.toList());
+
         return HabitDtoResponse.builder()
                 .id(habit.getId())
                 .title(habit.getTitle())
                 .description(habit.getDescription())
                 .tags(habit.getTags())
                 .difficulty(habit.getDifficulty())
-                .imageUrl(habit.getImageUrl())
+                .images(imageUrls)
                 .createdAt(habit.getCreatedAt())
                 .completed(habit.isCompleted())
                 .startDate(habit.getStartDate())
@@ -148,4 +162,3 @@ public class HabitServiceImpl implements HabitService {
                 .build();
     }
 }
-//on front part should to add calendar and duration of that habbit

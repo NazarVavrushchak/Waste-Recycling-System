@@ -1,6 +1,8 @@
 package com.ecowaste.recycling.service_impl;
 
 import com.ecowaste.recycling.dto.dashboard.DashboardResponseDto;
+import com.ecowaste.recycling.dto.dashboard.goal.GoalDtoResponse;
+import com.ecowaste.recycling.dto.dashboard.goal.GoalRequestDto;
 import com.ecowaste.recycling.entity.Goal;
 import com.ecowaste.recycling.entity.User;
 import com.ecowaste.recycling.enums.GoalStatus;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -54,15 +57,15 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     @Override
-    public void createGoal(Long userId, String description, String targetDate) {
-        User user = userRepo.findById(Math.toIntExact(userId))
-                .orElseThrow(() -> new IllegalArgumentException("User not found with ID :" + userId));
+    public void createGoal(GoalRequestDto request) {
+        User user = userRepo.findById(Math.toIntExact(request.getUserId()))
+                .orElseThrow(() -> new IllegalArgumentException("User not found with ID :" + request.getUserId()));
 
         Goal goal = Goal.builder()
                 .user(user)
-                .description(description)
+                .description(request.getDescription())
                 .status(GoalStatus.IN_PROGRESS)
-                .targetDate(targetDate != null ? LocalDate.parse(targetDate) : null)
+                .targetDate(request.getTargetDate() != null ? LocalDate.parse(request.getTargetDate()) : null)
                 .createdAt(LocalDate.now())
                 .updatedAt(LocalDate.now())
                 .build();
@@ -71,20 +74,27 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     @Override
-    public void updateGoal(Long goalId, String description, String targetDate, GoalStatus status) {
+    public void updateGoal(Long goalId, GoalRequestDto request) {
         Goal goal = goalRepo.findById(goalId)
                 .orElseThrow(() -> new IllegalArgumentException("Goal not found with ID :" + goalId));
 
-        goal.setDescription(description);
-        goal.setStatus(status);
-        goal.setTargetDate(targetDate != null ? LocalDate.parse(targetDate) : goal.getTargetDate());
+        goal.setDescription(request.getDescription());
+        goal.setStatus(request.getStatus());
+        goal.setTargetDate(request.getTargetDate() != null ? LocalDate.parse(request.getTargetDate()) : goal.getTargetDate());
         goal.setUpdatedAt(LocalDate.now());
 
         goalRepo.save(goal);
     }
 
-    public List<Goal> getUserGoals(Long userId) {
-        return goalRepo.findByUserId(userId);
+    public List<GoalDtoResponse> getUserGoals(Long userId) {
+        return goalRepo.findByUserId(userId).stream()
+                .map(goal -> GoalDtoResponse.builder()
+                        .id(goal.getId())
+                        .description(goal.getDescription())
+                        .status(goal.getStatus())
+                        .targetDate(goal.getTargetDate() != null ? goal.getTargetDate().toString() : null)
+                        .build())
+                .collect(Collectors.toList());
     }
 
     public void deleteGoal(Long goalId) {

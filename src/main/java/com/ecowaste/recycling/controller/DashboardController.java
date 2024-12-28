@@ -1,8 +1,8 @@
 package com.ecowaste.recycling.controller;
 
 import com.ecowaste.recycling.dto.dashboard.DashboardResponseDto;
-import com.ecowaste.recycling.entity.Goal;
-import com.ecowaste.recycling.enums.GoalStatus;
+import com.ecowaste.recycling.dto.dashboard.goal.GoalDtoResponse;
+import com.ecowaste.recycling.dto.dashboard.goal.GoalRequestDto;
 import com.ecowaste.recycling.service.DashboardService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,28 +22,19 @@ public class DashboardController {
     }
 
     @PostMapping("/goals")
-    public ResponseEntity<String> createGoal(
-            @RequestParam Long userId,
-            @RequestParam String description,
-            @RequestParam(required = false) String targetDate
-    ) {
-        dashboardService.createGoal(userId, description, targetDate);
+    public ResponseEntity<String> createGoal(@RequestBody GoalRequestDto request) {
+        dashboardService.createGoal(request);
         return ResponseEntity.ok("Goal created successfully");
     }
 
     @PutMapping("/goals/{goalId}")
-    public ResponseEntity<String> updateGoal(
-            @PathVariable Long goalId,
-            @RequestParam String description,
-            @RequestParam(required = false) String targetDate,
-            @RequestParam GoalStatus status
-    ) {
-        dashboardService.updateGoal(goalId, description, targetDate, status);
+    public ResponseEntity<String> updateGoal(@PathVariable Long goalId, @RequestBody GoalRequestDto request) {
+        dashboardService.updateGoal(goalId, request);
         return ResponseEntity.ok("Goal updated successfully");
     }
 
     @GetMapping("/goals")
-    public ResponseEntity<List<Goal>> getUserGoals(@RequestParam Long userId) {
+    public ResponseEntity<List<GoalDtoResponse>> getUserGoals(@RequestParam Long userId) {
         return ResponseEntity.ok(dashboardService.getUserGoals(userId));
     }
 

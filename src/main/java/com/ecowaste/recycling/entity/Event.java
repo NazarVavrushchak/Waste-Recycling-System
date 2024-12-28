@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "events")
@@ -49,4 +51,16 @@ public class Event {
 
     @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean completed;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY
+            , mappedBy = "event")
+    private List<Image> images = new ArrayList<>();
+
+    public void addImage(Image image) {
+        if (images == null) {
+            images = new ArrayList<>();
+        }
+        image.setEvent(this);
+        images.add(image);
+    }
 }

@@ -1,0 +1,269 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9fafb;
+    color: #333;
+}
+
+header nav {
+    background-color: #A4D07C;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.6rem;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+header nav ul li a:hover,
+header nav ul li a.active {
+    background-color: #68B985;
+    text-decoration: none;
+}
+
+.hero {
+    background: linear-gradient(135deg, #A4D07C, #4CAF50);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+}
+
+.hero button {
+    background-color: white;
+    color: #4CAF50;
+    font-weight: bold;
+    padding: 15px 25px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.hero button:hover {
+    background-color: #68B985;
+}
+
+.main-content {
+    padding: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.form-card {
+    flex: 1;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 300px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+form input, form select, form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+.event-item {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.event-item:hover {
+    transform: translateY(-5px);
+}
+
+.event-item img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.event-item h3 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.event-item p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+#events-container {
+    flex: 2;
+    min-width: 300px;
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+#events-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+#events-container::-webkit-scrollbar-thumb {
+    background-color: #A4D07C;
+    border-radius: 10px;
+}
+
+#events-container::-webkit-scrollbar-thumb:hover {
+    background-color: #68B985;
+}
+
+#events-container::-webkit-scrollbar-track {
+    background: #f9fafb;
+}
+
+.event-actions button {
+    margin: 5px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.event-actions .delete-btn {
+    background-color: #f44336; /* Red */
+    color: white;
+}
+
+.event-actions .update-btn {
+    background-color: #ffa500;
+    color: white;
+}
+
+.event-actions .complete-btn {
+    background-color: #68B985;
+    color: white;
+}
+
+.event-actions .complete-btn.disabled {
+    background-color: #ddd;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.event-actions button:hover {
+    transform: scale(1.05);
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1.1rem;
+}
+
+footer .social-icons a {
+    color: white;
+    margin: 0 15px;
+    font-size: 28px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+footer .social-icons a:hover {
+    transform: scale(1.2);
+    color: #A1FFCE;
+}
+
+.habit-actions button {
+    margin: 5px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.habit-actions .complete-btn {
+    background-color: #68B985;
+    color: white;
+}
+
+.habit-actions .complete-btn.disabled {
+    background-color: #ddd;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.habit-actions .update-btn {
+    background-color: #ffa500;
+    color: white;
+}
+
+.habit-actions .delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.habit-actions button:hover {
+    transform: scale(1.05);
+}

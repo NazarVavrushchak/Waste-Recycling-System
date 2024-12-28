@@ -4,6 +4,7 @@ import com.ecowaste.recycling.dto.event.EventRequestDto;
 import com.ecowaste.recycling.dto.event.EventResponseDto;
 import com.ecowaste.recycling.service.EventService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/event")
 @AllArgsConstructor
+@Slf4j
 public class EventController {
     private final EventService eventService;
 

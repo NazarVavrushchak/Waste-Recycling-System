@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,10 +20,10 @@ public class Habit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false , length = 70)
+    @Column(nullable = false, length = 70)
     private String title;
 
-    @Column(nullable = false , columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @Column(nullable = false)
@@ -46,7 +48,7 @@ public class Habit {
     @Column(nullable = false)
     private LocalDateTime endDate;
 
-    @Column(nullable = false)
+    @Column(name = "duration_in_days", nullable = false)
     private int durationInDays;
 
     @ManyToOne
@@ -55,4 +57,16 @@ public class Habit {
 
     @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean completed;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY
+            , mappedBy = "habit" ,  orphanRemoval = true)
+    private List<Image> images = new ArrayList<>();
+
+    public void addImage(Image image) {
+        if (images == null) {
+            images = new ArrayList<>();
+        }
+        image.setHabit(this);
+        images.add(image);
+    }
 }
